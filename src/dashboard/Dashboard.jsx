@@ -1,145 +1,53 @@
-import { Link } from "react-router-dom";
-import "./Dashboard.css";
 import Header from "../header/Header";
-import * as BookApi from "../BookApi";
-import { useEffect, useState } from "react";
+import Bookshelf from "../bookShelf/BookShelf";
+import AddBook from "../addBook/AddBook";
 
 const Dashboard = (props) => {
-  const [allBooks, setAllBooks] = useState([]);
+  // const [currentRead, setCurrentRead] = useState([]);
+  // const [wantRead, setWantRead] = useState([]);
+  // const [read, setRead] = useState([]);
 
-  const getAllBooks = () => {
-    const getBooks = async () => {
-      const resp = await BookApi.getAll();
-      console.log("resp >>", resp);
-      setAllBooks(resp);
-    };
-    getBooks();
-  };
+  // const getAllBooks = () => {
+  //   const getBooks = async () => {
+  //     const resp = await BookApi.getAll();
 
-  useEffect(() => {
-    getAllBooks();
-  }, []);
+  //     // setAllBooks(resp);
+
+  //     const filtCurrentRead = resp.filter(
+  //       (ele) => ele.shelf === "currentlyReading"
+  //     );
+  //     setCurrentRead(filtCurrentRead);
+
+  //     const filtwantRead = resp.filter((ele) => ele.shelf === "wantToRead");
+  //     setWantRead(filtwantRead);
+
+  //     const filtRead = resp.filter((ele) => ele.shelf === "read");
+  //     setRead(filtRead);
+  //   };
+  //   getBooks();
+  // };
+
+  // const updateBooks = () => {
+  //   const bookUpdate = async () => {
+  //     const resp = await BookApi.update();
+  //     console.log("update resp", resp);
+  //   };
+  //   bookUpdate();
+  // };
 
   return (
     <div>
       <Header />
       <div>
-        <div>
-          <h2 className="heading-border">Currently Reading</h2>
-          <div className="book-main-section">
-          {allBooks
-            .filter((ele) => ele.shelf === "currentlyReading")
-            .map((element) => (
-              <div className="book-section" key={element.id}>
-                <div className="book-section-main">
-                  <div
-                    className="book-cover"
-                    style={{
-                      width: 128,
-                      height: 193,
-                      backgroundImage: `url(${element.imageLinks.thumbnail})`,
-                    }}
-                  ></div>
-                  <div className="book-shelf-changer">
-                    <select>
-                      <option value="none" disabled>
-                        Move to..{" "}
-                      </option>
-                      <option value="currentlyReading">
-                        Currently Reading
-                      </option>
-                      <option value="wantToRead">Want to Read</option>
-                      <option value="read">Read</option>
-                      <option value="none"> None</option>
-                    </select>
-                  </div>
-                </div>
-                <div className="book-name">{element.title}</div>
-                <div className="author-name">{element.authors[0]}</div>
-              </div>
-            ))}
-            </div>
-        </div>
-
-        <div>
-          <h2 className="heading-border">Want to Read</h2>
-          <div className="book-main-section">
-          {allBooks
-            .filter((ele) => ele.shelf === "wantToRead")
-            .map((element) => (
-              <div className="book-section" key={element.id}>
-                <div className="book-section-main">
-                  <div
-                    className="book-cover"
-                    style={{
-                      width: 128,
-                      height: 193,
-                      backgroundImage: `url(${element.imageLinks.thumbnail})`,
-                    }}
-                  ></div>
-                  <div className="book-shelf-changer">
-                    <select>
-                      <option value="none" disabled>
-                        Move to..{" "}
-                      </option>
-                      <option value="currentlyReading">
-                        Currently Reading
-                      </option>
-                      <option value="wantToRead">Want to Read</option>
-                      <option value="read">Read</option>
-                      <option value="none"> None</option>
-                    </select>
-                  </div>
-                </div>
-                <div className="book-name">{element.title}</div>
-                <div className="author-name">{element.authors[0]}</div>
-              </div>
-            ))}
-            </div>
-        </div>
-
-        <div>
-          <h2 className="heading-border">Read</h2>
-          <div className="book-main-section">
-          {allBooks
-            .filter((ele) => ele.shelf === "read")
-            .map((element) => (
-              <div className="book-section" key={element.id}>
-                <div className="book-section-main">
-                  <div
-                    className="book-cover"
-                    style={{
-                      width: 128,
-                      height: 193,
-                      backgroundImage: `url(${element.imageLinks.thumbnail})`,
-                    }}
-                  ></div>
-                  <div className="book-shelf-changer">
-                    <select>
-                      <option value="none" disabled>
-                        Move to..{" "}
-                      </option>
-                      <option value="currentlyReading">
-                        Currently Reading
-                      </option>
-                      <option value="wantToRead">Want to Read</option>
-                      <option value="read">Read</option>
-                      <option value="none"> None</option>
-                    </select>
-                  </div>
-                </div>
-                <div className="book-name">{element.title}</div>
-                <div className="author-name">{element.authors[0]}</div>
-              </div>
-            ))}
-            </div>
-        </div>
-
-
+        <Bookshelf
+          allBooks={props.allBooks}
+          type="Currently Reading"
+          bookShelf="currentlyReading"
+        ></Bookshelf>
+        <Bookshelf allBooks={props.allBooks} type="Want to Read" bookShelf="wantToRead" ></Bookshelf>
+        <Bookshelf allBooks={props.allBooks} type="Read" bookShelf="read"></Bookshelf>
       </div>
-      <div className="open-search">
-        <Link to="/search">Add a book</Link>
-      </div>
+      <AddBook />
     </div>
   );
 };
