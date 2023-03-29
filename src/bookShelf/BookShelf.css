@@ -1,0 +1,50 @@
+.heading-border {
+  padding-bottom: 3px;
+  padding-left: 30px;
+  border-bottom: 1px solid #dedede;
+}
+
+.book-main-section {
+  display: flex;
+  justify-content: center;
+  gap: 50px;
+  flex-wrap: wrap;
+  margin-left: 100px;
+}
+
+.book-section {
+  display: flex;
+  flex-direction: column;
+  max-width: 180px;
+  max-height: 200px;
+  min-width: 180px;
+  min-height: 200px;
+  align-items: flex-start;
+  margin-bottom: 80px;
+}
+
+.book-section-main {
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-end;
+  position: relative;
+  height: 200px;
+}
+
+.book-cover {
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+  background: #eee;
+}
+
+.book-name {
+  margin-top: 10px;
+}
+
+.author-name {
+  color: #999;
+}
+
+.no-book{
+  text-align: center;
+  color: #808080;
+}
