@@ -23,9 +23,9 @@ function App() {
   return (
     <div className="App">
       <Routes>
-        <Route path="/" element={<Dashboard allBooks={allBooks} />}></Route>
+        <Route path="/" element={<Dashboard allBooks={allBooks} getAllBooks={getAllBooks}/>}></Route>
 
-        <Route path="/search" element={<SearchPage />} />
+        <Route path="/search" element={<SearchPage getAllBooks={getAllBooks}/>} />
       </Routes>
     </div>
   );

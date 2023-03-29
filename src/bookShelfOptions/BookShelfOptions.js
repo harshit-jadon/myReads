@@ -1,33 +1,29 @@
 import "./BookShelfOptions.css";
+import * as BookApi from "../BookApi";
 
-const BookShelfOptions = () => {
-  //   const chooseChoiceType = () => {
-  //     const value = document.getElementById("choiceType").value;
-  //     switch (value) {
-  //       case "currentlyReading":
-  //         console.log("value 1>>>", value);
-  //         break;
+const BookShelfOptions = (props) => {
 
-  //       case "wantToRead":
-  //         console.log("value 3>>>", value);
-  //         // setWantRead();
-  //         break;
+  const updateShelf = (selectedBook, selectedShelf)=>{
+    const callUpdateApi = async()=>{
+      await BookApi.update(selectedBook, selectedShelf);
+        props.getAllBooks()
+     }
+    callUpdateApi();
+   }
 
-  //       case "read":
-  //         console.log("value 2>>>", value);
-  //         break;
-
-  //       default:
-  //     }
-  //   };
+  const updateBookShelfOptions = (e)=>{
+    const selectedBook = props.book;
+    const selectedShelf = e.target.value;
+    updateShelf(selectedBook,selectedShelf);
+  }
 
   return (
     <div className="book-shelf-changer">
-      <select id="choiceType">
+      <select id="choiceType" onChange={updateBookShelfOptions} value={props.book.shelf ? props.book.shelf : "none"}>
         <option value="none" disabled>
           Move to..
         </option>
-        <option value="currentlyReading" selected>
+        <option value="currentlyReading">
           Currently Reading
         </option>
         <option value="wantToRead">Want to Read</option>
