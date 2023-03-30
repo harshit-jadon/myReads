@@ -3,6 +3,7 @@ import "./SearchPage.css";
 import * as BookApi from "../BookApi";
 import Book from "../book/Book";
 import BackNavigation from "../backNavigation/BackNavigation";
+import { PropTypes } from "prop-types";
 
 const SearchPage = (props) => {
   const [searchValue, setSearchValue] = useState("");
@@ -18,6 +19,13 @@ const SearchPage = (props) => {
     const searchApi = async () => {
       const resp = await BookApi.search(bookName, num);
       if (resp.length) {
+        resp.map((respBook)=>{
+          props.allBooks.map((allBook)=>{
+            if(respBook.id === allBook.id){
+              respBook["shelf"] = allBook.shelf
+            }
+          })
+        })
         setSearchResp(resp);
         setNoresult(false);
       } else {
@@ -29,13 +37,13 @@ const SearchPage = (props) => {
   };
 
   useEffect(() => {
-    if (searchValue.length > 0) {
+    if (searchValue.trim().length > 0) {
       const num = 100;
       searchBooks(searchValue, num);
     } else {
       setNoresult(false);
     }
-  }, [searchValue]);
+  },[searchValue]);
 
   return (
     <div className="search-books">
@@ -64,3 +72,8 @@ const SearchPage = (props) => {
 };
 
 export default SearchPage;
+
+SearchPage.propTypes = {
+  allBooks: PropTypes.array.isRequired,
+  getAllBooks: PropTypes.func.isRequired,
+};

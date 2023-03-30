@@ -24,7 +24,7 @@ function App() {
     <div className="App">
       <Routes>
         <Route path="/" element={<Dashboard allBooks={allBooks} getAllBooks={getAllBooks}/>}></Route>
-        <Route path="/search" element={<SearchPage getAllBooks={getAllBooks}/>} />
+        <Route path="/search" element={<SearchPage getAllBooks={getAllBooks} allBooks={allBooks}/>} />
       </Routes>
     </div>
   );

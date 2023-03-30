@@ -1,6 +1,7 @@
 import Header from "../header/Header";
 import Bookshelf from "../bookShelf/BookShelf";
 import AddBook from "../addBook/AddBook";
+import { PropTypes } from "prop-types";
 
 const Dashboard = (props) => {
   return (
@@ -32,3 +33,8 @@ const Dashboard = (props) => {
 };
 
 export default Dashboard;
+
+Dashboard.propTypes = {
+  allBooks: PropTypes.array.isRequired,
+  getAllBooks: PropTypes.func.isRequired,
+};
