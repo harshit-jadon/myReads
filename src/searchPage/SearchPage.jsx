@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import "./SearchPage.css";
 import * as BookApi from "../BookApi";
-import BookShelfOptions from "../bookShelfOptions/BookShelfOptions";
+import Book from "../book/Book";
 import BackNavigation from "../backNavigation/BackNavigation";
 
 const SearchPage = (props) => {
@@ -46,32 +46,7 @@ const SearchPage = (props) => {
       <ol className="books-grid">
         <div className="book-flex">
           {searchValue ? (
-            searchResp.map((book) => {
-              return (
-                <div className="book-main-section" key={book.id}>
-                  <div className="book-section">
-                    <div className="book-section-main">
-                      <div
-                        className="book-cover"
-                        style={{
-                          width: 128,
-                          height: 193,
-                          backgroundImage: `url(${book?.imageLinks?.thumbnail})`,
-                        }}
-                      ></div>
-                      <BookShelfOptions
-                        getAllBooks={props.getAllBooks}
-                        book={book}
-                      />
-                    </div>
-                    <div className="book-name">{book.title}</div>
-                    <div className="author-name">
-                      {book.authors !== undefined ? book.authors[0] : ""}
-                    </div>
-                  </div>
-                </div>
-              );
-            })
+            <Book filterShelf={searchResp} getAllBooks={props.getAllBooks} />
           ) : (
             <div>
               <h3 className="no-book">Please search book</h3>
