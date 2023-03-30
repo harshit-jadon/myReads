@@ -1,5 +1,6 @@
 import "./BookShelfOptions.css";
 import * as BookApi from "../BookApi";
+import { PropTypes } from "prop-types";
 
 const BookShelfOptions = (props) => {
 
@@ -19,8 +20,8 @@ const BookShelfOptions = (props) => {
 
   return (
     <div className="book-shelf-changer">
-      <select id="choiceType" onChange={updateBookShelfOptions} value={props.book.shelf ? props.book.shelf : "none"}>
-        <option value="none" disabled>
+      <select id="choiceType" onChange={updateBookShelfOptions} value={props.shelfValue !== undefined ? props.shelfValue : "none" }>
+        <option value="moveTo" disabled>
           Move to..
         </option>
         <option value="currentlyReading">
@@ -35,3 +36,8 @@ const BookShelfOptions = (props) => {
 };
 
 export default BookShelfOptions;
+
+BookShelfOptions.propTypes = {
+  getAllBooks: PropTypes.func.isRequired,
+  book: PropTypes.object.isRequired,
+};

@@ -1,5 +1,6 @@
 import "./Book.css";
 import BookShelfOptions from "../bookShelfOptions/BookShelfOptions";
+import { PropTypes } from "prop-types";
 
 const Book = (props) => {
   return (
@@ -23,7 +24,7 @@ const Book = (props) => {
           </div>
           <div className="book-name">{ele.title}</div>
           <div className="author-name">
-            {ele.authors !== undefined ? ele.authors[0] : ""}
+            {ele.authors !== undefined ? ele && ele.authors && ele.authors.join(", ") : ""}
           </div>
         </div>
       ))}
@@ -32,3 +33,8 @@ const Book = (props) => {
 };
 
 export default Book;
+
+Book.propTypes = {
+  filterShelf: PropTypes.array.isRequired,
+  getAllBooks: PropTypes.func.isRequired,
+};
